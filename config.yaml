@@ -1,0 +1,55 @@
+# Configuration file for Protein FT-Transformer
+
+# Data configuration
+data:
+  train_path: "data/train.csv"
+  test_path: "data/test.csv"
+  validation_split: 0.1
+  target_column: "target"
+  categorical_columns: []  # List categorical column names if any
+  numeric_columns: []  # List numeric column names if any (auto-detected if empty)
+
+# Model configuration
+model:
+  d_token: 128
+  n_head: 8
+  n_layers: 6
+  dropout: 0.2
+  ff_dim_factor: 4
+  use_feature_importance: true
+
+# Training configuration
+training:
+  batch_size: 64
+  num_epochs: 100
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  gradient_clip: 1.0
+  early_stopping_patience: 15
+  early_stopping_min_delta: 0.001
+  save_best_only: true
+  use_mixed_precision: true
+
+# Loss function configuration
+loss:
+  focal_gamma: 2.0
+  label_smoothing: 0.1
+  use_class_weights: true
+
+# Evaluation configuration
+evaluation:
+  metrics: ["accuracy", "f1_weighted", "f1_macro", "auc_ovr", "auc_ovo"]
+  confusion_matrix: true
+  feature_importance_plot: true
+  top_n_features: 20
+
+# Output configuration
+output:
+  model_save_dir: "saved_models"
+  results_save_dir: "results"
+  tensorboard_log_dir: "logs/tensorboard"
+  wandb_project: "protein-ft-transformer"
+  wandb_entity: null
+
+# Random seeds for reproducibility
+seed: 42
